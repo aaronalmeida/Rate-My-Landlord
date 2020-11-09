@@ -6,7 +6,7 @@ import ReviewForm from "../components/Reviewform";
 function WriteReview() {
   return (
     <div>
-      <NavBar />
+      <h1> Write A Review</h1>
       <Searchbox />
       <br />
       <ReviewForm />

@@ -13,8 +13,8 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/App";
+import App from "./App";
 import WriteReview from "./pages/Writerev";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-ReactDOM.render(<WriteReview />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
