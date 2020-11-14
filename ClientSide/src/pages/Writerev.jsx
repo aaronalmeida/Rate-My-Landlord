@@ -1,16 +1,36 @@
-import React from "react";
+import React, { Component } from "react";
+import axios from "axios";
 import Searchbox from "../components/Searchbox";
 import ReviewForm from "../components/Reviewform";
+import Button from "react-bootstrap/Button";
 
-function WriteReview() {
-  return (
-    <div>
-      <h1> Write A Review</h1>
-      <Searchbox />
-      <br />
-      <ReviewForm />
-    </div>
-  );
+export default class WriteReview extends Component {
+  constructor() {
+    super();
+    this.state = {
+      address: "",
+      title: "",
+      review: "",
+    };
+  }
+
+  callbackFunction = (childData) => {
+    this.setState({
+      address: childData.address,
+      title: childData.title,
+      review: childData.review,
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <h1> Write A Review</h1>
+        <ReviewForm parentCallback={this.callbackFunction} />
+        <div>The house address is: {this.state.address}</div>
+        <div>The review title is: {this.state.title}</div>
+        <div>The house review is: {this.state.review}</div>
+      </div>
+    );
+  }
 }
-
-export default WriteReview;
