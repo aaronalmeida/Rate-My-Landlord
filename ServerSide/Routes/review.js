@@ -12,10 +12,17 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/specific", (req, res) => {
-  res.send("Review page specific lol");
+//Get a specific review
+router.get("/:reviewId", async (req, res) => {
+  try {
+    const review = await Review.findById(req.params.reviewId);
+    res.json(review);
+  } catch (err) {
+    res.json(err);
+  }
 });
 
+//Post a review
 router.post("/", async (req, res) => {
   const review = new Review({
     address: req.body.address,
@@ -26,6 +33,28 @@ router.post("/", async (req, res) => {
   try {
     const savedReview = await review.save();
     res.json(savedReview);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+//Delete a review
+router.delete("/:reviewId", async (req, res) => {
+  try {
+    const removedReview = await Review.remove({ _id: req.params.reviewId });
+    res.json(removedReview);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+router.patch("/:reviewId", async (req, res) => {
+  try {
+    const patchedReview = await Review.updateOne(
+      { _id: req.params.reviewId },
+      { $set: { title: req.body.title } }
+    );
+    res.json(patchedReview);
   } catch (err) {
     res.json(err);
   }
