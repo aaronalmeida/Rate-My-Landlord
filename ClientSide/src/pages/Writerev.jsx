@@ -20,6 +20,16 @@ export default class WriteReview extends Component {
       title: childData.title,
       review: childData.review,
     });
+
+    axios
+      .post("/review", {
+        title: childData.title,
+        address: childData.address,
+        review: childData.review,
+      })
+      .then((response) => {
+        console.log(response);
+      });
   };
 
   render() {
