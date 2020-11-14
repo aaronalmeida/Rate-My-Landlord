@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "../components/Navbar";
 import SearchBox from "../components/Searchbox";
 
 function Home() {

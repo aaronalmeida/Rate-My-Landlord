@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "../components/Navbar";
 import Searchbox from "../components/Searchbox";
 import ReviewForm from "../components/Reviewform";
 

@@ -18,12 +18,8 @@ function NavBar() {
             <Nav.Link as={Link} to="/writeareview">
               Write A Review
             </Nav.Link>
-            <Link>
-              <Nav.Link>Sign Up</Nav.Link>
-            </Link>
-            <Link>
-              <Nav.Link>Log In</Nav.Link>
-            </Link>
+            <Nav.Link>Sign Up</Nav.Link>
+            <Nav.Link>Log In</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
