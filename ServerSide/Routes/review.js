@@ -12,6 +12,19 @@ router.get("/", async (req, res) => {
   }
 });
 
+//Search based on address
+router.get("/find/:query", async (req, res) => {
+  try {
+    var query = req.params.query;
+    const search = { address: query };
+    const house = await Review.findOne(search);
+    console.log(house);
+    res.json(house);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 //Get a specific review
 router.get("/:reviewId", async (req, res) => {
   try {

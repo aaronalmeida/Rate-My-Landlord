@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Searchbox from "../components/Searchbox";
 import ReviewForm from "../components/Reviewform";
-import Button from "react-bootstrap/Button";
 
 export default class WriteReview extends Component {
   constructor() {
