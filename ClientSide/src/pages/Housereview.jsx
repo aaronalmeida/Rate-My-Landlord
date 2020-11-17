@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import axios from "axios";
+import { Link, useParams, withRouter } from "react-router-dom";
 
-export default class Housereview extends Component {
-  constructor() {
-    super();
+class Housereview extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
       title: "",
       address: "",
@@ -11,15 +12,24 @@ export default class Housereview extends Component {
     };
   }
 
-  componentDidMount = () => {
-    axios.get("/review/:reviewId").then((response) => {
-      this.setState({
-        title: response.data.title,
-        address: response.data.address,
-        review: response.data.review,
+  componentDidMount() {
+    const id = this.props.match.params.id;
+    this.fetchData(id);
+  }
+
+  fetchData = (id) => {
+    axios
+      .get("/review/" + id)
+      .then((response) => {
+        this.setState({
+          title: response.data.title,
+          address: response.data.address,
+          review: response.data.review,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
       });
-      console.log(response);
-    });
   };
 
   render() {
@@ -32,3 +42,5 @@ export default class Housereview extends Component {
     );
   }
 }
+
+export default withRouter(Housereview);

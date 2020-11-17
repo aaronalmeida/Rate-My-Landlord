@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default class Home extends Component {
   constructor() {
     super();
     this.state = {
       address: "",
+      id: "",
     };
   }
 
@@ -15,9 +17,10 @@ export default class Home extends Component {
     this.setState({ [nam]: val });
   };
 
-  sendData = () => {
-    axios.get("/find/" + this.state.address).then((response) => {
-      console.log(response);
+  sendData = async () => {
+    const res = await axios.get("review/find/" + this.state.address);
+    this.setState({
+      id: res.data._id,
     });
   };
 
@@ -32,7 +35,7 @@ export default class Home extends Component {
           onChange={this.handleChange}
         />
         <button onClick={this.sendData}> Search </button>
-        <div>The house address is: {this.state.address}</div>
+        <div>The house address is: {this.state.id}</div>
       </div>
     );
   }
