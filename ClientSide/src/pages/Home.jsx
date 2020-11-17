@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory, withRouter } from "react-router-dom";
 
-export default class Home extends Component {
+class Home extends Component {
   constructor() {
     super();
     this.state = {
-      address: "",
       id: "",
     };
   }
@@ -22,6 +21,8 @@ export default class Home extends Component {
     this.setState({
       id: res.data._id,
     });
+    console.log(this.state.id);
+    this.props.history.push("housereview/" + this.state.id);
   };
 
   render() {
@@ -40,3 +41,5 @@ export default class Home extends Component {
     );
   }
 }
+
+export default withRouter(Home);
