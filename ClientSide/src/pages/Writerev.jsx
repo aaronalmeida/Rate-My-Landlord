@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import ReviewForm from "../components/Reviewform";
+import { withRouter } from "react-router-dom";
 
-export default class WriteReview extends Component {
+class WriteReview extends Component {
   constructor() {
     super();
     this.state = {
@@ -12,22 +13,43 @@ export default class WriteReview extends Component {
     };
   }
 
-  callbackFunction = (childData) => {
-    this.setState({
-      address: childData.address,
-      title: childData.title,
-      review: childData.review,
-    });
+  sendData = async () => {};
 
-    axios
-      .post("/review", {
-        title: childData.title,
+  callbackFunction = async (childData) => {
+    this.setState(
+      {
         address: childData.address,
+        title: childData.title,
         review: childData.review,
-      })
-      .then((response) => {
-        console.log(response);
-      });
+      },
+      async function () {
+        const res = await axios.get("review/find/" + this.state.address);
+        console.log(res);
+        if (res.data != null) {
+          await axios
+            .put("/review/" + res.data._id, {
+              title: childData.title,
+              address: childData.address,
+              review: childData.review,
+            })
+            .then((response) => {
+              console.log(response);
+            });
+        } else {
+          await axios
+            .post("/review", {
+              title: childData.title,
+              address: childData.address,
+              review: childData.review,
+            })
+            .then((response) => {
+              console.log(response);
+            });
+        }
+
+        this.props.history.push("thankyou/");
+      }
+    );
   };
 
   render() {
@@ -35,10 +57,9 @@ export default class WriteReview extends Component {
       <div>
         <h1> Write A Review</h1>
         <ReviewForm parentCallback={this.callbackFunction} />
-        <div>The house address is: {this.state.address}</div>
-        <div>The review title is: {this.state.title}</div>
-        <div>The house review is: {this.state.review}</div>
       </div>
     );
   }
 }
+
+export default withRouter(WriteReview);

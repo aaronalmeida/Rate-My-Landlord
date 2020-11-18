@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link, useHistory, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
       id: "",
+      outputMessage: "",
     };
   }
 
@@ -18,11 +19,18 @@ class Home extends Component {
 
   sendData = async () => {
     const res = await axios.get("review/find/" + this.state.address);
-    this.setState({
-      id: res.data._id,
-    });
-    console.log(this.state.id);
-    this.props.history.push("housereview/" + this.state.id);
+    console.log(res.data);
+    if (res.data == null) {
+      this.setState({
+        outputMessage: "house does not exist",
+      });
+    } else {
+      this.setState({
+        id: res.data._id,
+      });
+      console.log(this.state.id);
+      this.props.history.push("housereview/" + this.state.id);
+    }
   };
 
   render() {
@@ -36,7 +44,7 @@ class Home extends Component {
           onChange={this.handleChange}
         />
         <button onClick={this.sendData}> Search </button>
-        <div>The house address is: {this.state.id}</div>
+        <div>{this.state.outputMessage}</div>
       </div>
     );
   }

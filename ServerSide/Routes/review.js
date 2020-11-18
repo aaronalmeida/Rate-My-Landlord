@@ -35,12 +35,12 @@ router.get("/:reviewId", async (req, res) => {
   }
 });
 
-//Post a review
+//Post a review to a new address
 router.post("/", async (req, res) => {
   const review = new Review({
     address: req.body.address,
     title: req.body.title,
-    review: req.body.review,
+    review: [req.body.review],
   });
 
   try {
@@ -48,6 +48,21 @@ router.post("/", async (req, res) => {
     res.json(savedReview);
   } catch (err) {
     res.json(err);
+  }
+});
+
+//Add a review to existing address
+router.put("/:reviewId", async (req, res) => {
+  try {
+    let result = await Review.updateOne(
+      { _id: req.params.reviewId },
+      { $push: { review: req.body.review } }
+    );
+    console.log(result);
+    res.json(result);
+  } catch (err) {
+    res.json(err);
+    console.log(err);
   }
 });
 

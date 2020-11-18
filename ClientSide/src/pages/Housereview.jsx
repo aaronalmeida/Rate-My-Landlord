@@ -1,6 +1,6 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import axios from "axios";
-import { Link, useParams, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 class Housereview extends Component {
   constructor(props) {
