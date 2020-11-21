@@ -39,7 +39,7 @@ router.get("/:reviewId", async (req, res) => {
 router.post("/", async (req, res) => {
   const review = new Review({
     address: req.body.address,
-    title: req.body.title,
+    title: [req.body.title],
     review: [req.body.review],
   });
 
@@ -56,7 +56,7 @@ router.put("/:reviewId", async (req, res) => {
   try {
     let result = await Review.updateOne(
       { _id: req.params.reviewId },
-      { $push: { review: req.body.review } }
+      { $push: { review: req.body.review, title: req.body.title } }
     );
     console.log(result);
     res.json(result);

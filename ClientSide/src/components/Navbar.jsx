@@ -18,7 +18,9 @@ function NavBar() {
             <Nav.Link as={Link} to="/writeareview">
               Write A Review
             </Nav.Link>
-            <Nav.Link>Sign Up</Nav.Link>
+            <Nav.Link as={Link} to="/account">
+              Sign Up
+            </Nav.Link>
             <Nav.Link>Log In</Nav.Link>
           </Nav>
         </Navbar.Collapse>

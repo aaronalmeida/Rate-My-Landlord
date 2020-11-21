@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Writerev from "./pages/Writerev";
 import Housereview from "./pages/Housereview";
 import Afterreview from "./pages/Afterreview";
+import Account from "./pages/Account";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             render={(props) => <Housereview />}
           />
           <Route exact path="/thankyou" component={Afterreview} />
+          <Route path="/account" exact component={Account} />
         </Switch>
       </div>
     </Router>
