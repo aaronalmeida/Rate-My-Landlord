@@ -25,7 +25,7 @@ class GoogleBtn extends Component {
         isLogined: true,
         accessToken: response.accessToken,
       }));
-      console.log(response);
+      sessionStorage.setItem("user", response.accessToken);
     }
   }
 
@@ -34,17 +34,15 @@ class GoogleBtn extends Component {
       isLogined: false,
       accessToken: "",
     }));
-    console.log(response);
+    sessionStorage.clear();
   }
 
   handleLoginFailure(response) {
     alert("Failed to log in");
-    console.log(response);
   }
 
   handleLogoutFailure(response) {
     alert("Failed to log out");
-    console.log(response);
   }
 
   render() {
